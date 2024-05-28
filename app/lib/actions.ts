@@ -5,6 +5,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
+import bcrypt from 'bcrypt';
 
 export async function authenticate(
   prevState: string | undefined,
@@ -23,6 +24,35 @@ export async function authenticate(
     }
     throw error;
   }
+}
+
+export async function createUser(prevState: State, formData: FormData) {
+  const userData = {
+    name: formData.get('username') as string,
+    email: formData.get('email') as string,
+    password: formData.get('password') as string,
+  };
+
+  const hashedPassword = await bcrypt.hash(userData.password, 10);
+
+  try {
+    await sql`
+      INSERT INTO users (name, email, password)
+      VALUES (${userData.name}, ${userData.email}, ${hashedPassword}) `;
+  } catch (error) {
+    console.log(error, 'erorrs');
+    return {
+      message: 'Database Error: Failed to Create User.',
+    };
+  }
+
+  try {
+    await signIn('credentials', formData);
+  } catch (error) {
+    console.log(error, 'erorrs');
+  }
+  revalidatePath('/dashboard');
+  redirect('/dashboard');
 }
 
 const FormSchema = z.object({
