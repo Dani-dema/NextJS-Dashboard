@@ -11,6 +11,7 @@ import { Button } from './button';
 import { useFormState, useFormStatus } from 'react-dom';
 import { authenticate } from '@/app/lib/actions';
 import Link from 'next/link';
+import emailHandler from '../pages/api/apitest';
 
 export default function LoginForm() {
   const [errorMessage, dispatch] = useFormState(authenticate, undefined);
@@ -85,6 +86,16 @@ export default function LoginForm() {
             Sign up <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
           </Button>
         </Link>
+      </div>
+      <div className="mt-4 flex flex-row items-center justify-center">
+        <Button
+          className="ml-2 w-auto "
+          onClick={() => {
+            emailHandler();
+          }}
+        >
+          Test email <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
+        </Button>
       </div>
     </div>
   );
