@@ -1,5 +1,5 @@
-## Next.js App Router Course - Starter
+## Next.js App 
 
-This is the starter template for the Next.js App Router Course. It contains the starting code for the dashboard application.
+Next.js Invoice Dashboard
 
-For more information, see the [course curriculum](https://nextjs.org/learn) on the Next.js Website.
+The Next.js Dashboard is a modern and responsive application designed to manage invoices and customers efficiently. Built with Next.js for a seamless user experience, this dashboard leverages GraphQL for robust and flexible database interactions. Key features include creating, viewing, and managing invoices, maintaining detailed customer profiles, and generating insightful reports. The intuitive interface ensures users can navigate and perform tasks with ease, making it an essential tool for businesses looking to streamline their invoicing processes
